@@ -6,5 +6,6 @@ Meet the Phone by Mako. It's a simple, do it yourself phone that teaches you how
 
 Our mission is to teach people how everyday electronics work by having them build their own version of a device. In the kit, people learn how phones work, how keypads work, and how to code in the Arduino programming language.
 
+
 ![Logo]
 (https://www.phonebymako.com/logo-2.png)
