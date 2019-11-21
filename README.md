@@ -1,4 +1,4 @@
-# Phone by Mako
+![Logo](https://phonebymako.com/logo-4.png) # Phone by Mako
 ## Here to create and inspire the next generation of makers.
 https://www.phonebymako.com/
 
