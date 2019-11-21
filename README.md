@@ -9,6 +9,12 @@ Our mission is to teach people how everyday electronics work by having them buil
 
 
 The code can be found in the file MakoSystem.ino, and you can upload, edit, or hack the code as much as you want! If you add a new feature to your Phone by Mako, add a file in the Features folder.
+
+## How to install the code
+## Downloading the code
+First, install the Arduino IDE from https://www.arduino.cc/en/Main/Software. Download and install the Arduino file for your operating system. Download the file `MakoSystem.ino` above, and open the Arduino IDE. In the IDE, click File>Open, and open the code for `MakoSystem.ino`. If prompted, move into a subfolder. 
+
 <p align="center">
+  <br>
   <img width="100px" src="http://phonebymako.com/logo-4.png">
 </p>
