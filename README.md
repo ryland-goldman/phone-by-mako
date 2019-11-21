@@ -1,4 +1,5 @@
-![Logo](https://phonebymako.com/logo-4.png) # Phone by Mako
+
+# Phone by Mako
 ## Here to create and inspire the next generation of makers.
 https://www.phonebymako.com/
 
@@ -8,3 +9,6 @@ Our mission is to teach people how everyday electronics work by having them buil
 
 
 The code can be found in the file MakoSystem.ino, and you can upload, edit, or hack the code as much as you want! If you add a new feature to your Phone by Mako, add a file in the Features folder.
+<p align="center">
+  <img width="100px" src="http://phonebymako.com/logo-4.png">
+</p>
