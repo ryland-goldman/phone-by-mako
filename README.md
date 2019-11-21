@@ -10,11 +10,15 @@ Our mission is to teach people how everyday electronics work by having them buil
 
 The code can be found in the file MakoSystem.ino, and you can upload, edit, or hack the code as much as you want! If you add a new feature to your Phone by Mako, add a file in the Features folder.
 
-## How to install the code
-## Downloading the code
-First, install the Arduino IDE from https://www.arduino.cc/en/Main/Software. Download and install the Arduino file for your operating system. Download the file `MakoSystem.ino` above, and open the Arduino IDE. In the IDE, click File>Open, and open the code for `MakoSystem.ino`. If prompted, move into a subfolder. 
-
 <p align="center">
   <br>
   <img width="100px" src="http://phonebymako.com/logo-4.png">
 </p>
+
+
+# How to install the code
+## Downloading the code
+First, install the Arduino IDE from https://www.arduino.cc/en/Main/Software. Download and install the Arduino file for your operating system. Download the file `MakoSystem.ino` above, and open the Arduino IDE. In the IDE, click File>Open, and open the code for `MakoSystem.ino`. If prompted, move into a subfolder. 
+
+## Installing the libraries
+To install the library for the `Adafruit Feather FONA`, go to File>Preferences, and where it says `Additional Boards Manager URLs`, type the following URL: https://adafruit.github.io/arduino-board-index/package_adafruit_index.json. Also, download the `U8Glib.zip` and `Keypad.zip` files from the `Libraries` folder above. Move these files into your documents folder, and into a folder titled `Arduino`. Inside, there should be a folder called `Libraries`. Put these files there and unzip them.
