@@ -7,7 +7,7 @@ Meet the Phone by Mako. It's a simple, do it yourself phone that teaches you how
 Our mission is to teach people how everyday electronics work by having them build their own version of a device. In the kit, people learn how phones work, how keypads work, and how to code in the Arduino programming language.
 
 
-The code can be found in the file MakoSystem.ino, and you can upload, edit, or hack the code as much as you want! If you add a new feature to your Phone by Mako, add a file in the Features folder.
+The code can be found in the file `MakoSystem.ino`, and you can upload, edit, or hack the code as much as you want! If you add a new feature to your Phone by Mako, add a file in the Features folder.
 
 <p align="center">
   <br>
