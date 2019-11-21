@@ -11,7 +11,7 @@ The code can be found in the file `MakoSystem.ino`, and you can upload, edit, or
 
 <p align="center">
   <br>
-  <img width="100px" src="http://phonebymako.com/logo-4.png">
+  <img width="60px" src="http://phonebymako.com/logo-4.png">
 </p>
 
 
