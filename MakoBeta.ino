@@ -65,13 +65,9 @@ int16_t vbat;
 char favorites[][20]={"1111111111","0000000000","0000000000","0000000000","0000000000"};
 
 void setup() {
-  // clear the screen
-  // left from last "on"
     u8g.firstPage();  
   do {
   } while( u8g.nextPage() );
-    //delay(1000);
- 
   Serial.begin(9600);
   if(EEPROM.read(1) == 1){
     EEPROM.get(0, data);
@@ -85,8 +81,6 @@ void setup() {
   do {
     msgConnect();
   } while( u8g.nextPage() );
-  
-   //delay(2000);
   fonaSS.begin(9600);
  
   if (! fona.begin(fonaSS)) {
@@ -147,78 +141,25 @@ void msgNetService()
 }
 
 void msgNetConnect() {
-   //u8g.setFont(u8g_font_lucasfont_alternater);
    u8g.setFont(u8g_font_6x12);
    u8g.drawStr(42, 32,"Welcome");
-}
-
-int8_t getRSSI (int8_t i) {
-  uint8_t n = fona.getRSSI();
-  int8_t r;
-  
-  if (n == 0) r = -115;
-  if (n == 1) r = -111;
-  if (n == 31) r = -52;
-  if ((n >= 2) && (n <= 30)) {
-    r = map(n, 2, 30, -110, -54);
-  }
-  return(r);
 }
 
 uint16_t getBattery(uint16_t i) {
   uint16_t vbat; 
   if (! fona.getBattPercent(&vbat)) {
+    return;
   } else {
     return(vbat);
   }
 }
 
-void cellDate() {
- char buffer[23];
- fona.getTime(buffer, 23);  // make sure replybuffer is at least 23 bytes!
- 
- String Str1 = buffer;
- dispDate = Str1.substring(4,9);
- dispDate.concat("/");
- dispDate.concat(Str1.substring(1,3));
-}
-
-void cellTime() {
-  char buffer[23]; 
-  
-  fona.getTime(buffer, 23);
-  String Str1 = buffer;
-  
-  String Str2;
-  
-  int rptHour = (Str1.substring(10,12).toInt());
-  int rptMinutes = (Str1.substring(13,15).toInt());
-  int i = rptHour;
-  
-  if ( rptHour > 12 ) {
-    rptHour = rptHour-12;
-  }
-  
-  Str2.concat(rptHour);
-  Str2.concat(":");
-  if (rptMinutes < 10)
-   { Str2.concat(0);}
-   Str2.concat(rptMinutes);
-  if ( i >= 12 )
-    { Str2.concat(" PM");}
-  else
-    { Str2.concat(" AM");}
-  
-  dispTime = Str2;
-
-}
 
 void callEntry() {
   char phoneNumber[20]= " ";
   char key = keypad.getKey();
   int i = 0;
   callStatus = "Dial a Number";
-  //Display the page!
   u8g.firstPage();
   do { 
         callEntryDisplay(phoneNumber);
@@ -278,9 +219,9 @@ void makeCall(char phoneNumber[20]) {
     } while( u8g.nextPage() );
    }
    int callstatus = fona.getCallStatus();
-   if (callstatus == 2)   // phone is currently ringing
+   if (callstatus == 2)
    {
-    // use ringing tone AT+STONE 8
+
    }
   }
   if (! fona.hangUp()) {
@@ -289,7 +230,6 @@ void makeCall(char phoneNumber[20]) {
 }
 
 void callEntryDisplay(char inNumber[20]) { 
-  //u8g.setFont(u8g_font_lucasfont_alternater);
   u8g.setFont(u8g_font_6x12);
   
   u8g.setPrintPos(0,7);
@@ -321,7 +261,6 @@ void callFavorites() {
  char phoneNumber[20] = " ";
  char key = keypad.getKey();
  int i = 0;
- //Display the page!
  u8g.firstPage();  
  do { 
         favsEntryDisplay(); 
@@ -332,7 +271,7 @@ while ((key != '*') and (key != '#')) {
    
     if (key)
       if ((key != '*') and (key != '#'))
-    { // convert a single character to int
+    {
       int ikey = key - '0';
      strcpy(phoneNumber, favorites[ikey-1]);
       u8g.firstPage();  
@@ -343,7 +282,6 @@ while ((key != '*') and (key != '#')) {
      }
    }  
    
-// remove "*" from string
 int length = sizeof(phoneNumber);
 phoneNumber[length-1] = '\0';   
 
@@ -366,16 +304,12 @@ if (key == '*')
 void keyPress()
 {
   char key = keypad.getKey();
-
-    // Answer an incoming call
   if (key == '*')
   { answerPhone();
     
     return;
     }
 
-
-// convert a single character to int
   int ikey = key - '0';
   
   switch (ikey) {
@@ -386,7 +320,7 @@ void keyPress()
       callFavorites();
       break;
     case 3:
-      startPong();
+      //startPong();
       break;
     case 4:
       settings();
@@ -402,19 +336,14 @@ void keyPress()
         break;
       }
     default: 
-      // if nothing else matches, do the default
-      // default is optional
+      
     break;
   }
   
 }
 
-void dispMenu(int8_t dbi, uint16_t vbat) //HOME
-{   // set font 
-    //u8g.setFont(u8g_font_lucasfont_alternater);
-      u8g.setFont(u8g_font_6x12);
-      
-    // draw variable battery level and per cent battery remaining
+void dispMenu(uint16_t vbat){
+    u8g.setFont(u8g_font_6x12);
     u8g.drawFrame(111,0,14,7);
     u8g.drawBox(126,2,2,3);
     
@@ -422,8 +351,6 @@ void dispMenu(int8_t dbi, uint16_t vbat) //HOME
     u8g.setPrintPos(86,7);
     u8g.print(vbat);
     u8g.print("%");
-
-    // draw text menu
     u8g.drawStr(0, 26,"1 Dial");
     u8g.drawStr(0, 40,"2 Contacts");
     u8g.drawStr(0, 54,"3 Pong");
@@ -433,28 +360,23 @@ void dispMenu(int8_t dbi, uint16_t vbat) //HOME
       u8g.drawStr(64, 54, "6 Stocks");
     }
 
-    // display the time
     u8g.setPrintPos(0, 7);
     u8g.print(dispTime);
 }
 
 void loop() {
-  // don't hog the processor!
   if (millis() - lastDisplay > 10000) {
-    dbi = getRSSI(i_8);
     vbat = getBattery(i_16);
-    cellDate();
-    cellTime();
     lastDisplay = millis();
   }
   u8g.firstPage();  
   do {
-    dispMenu(dbi, vbat);
-    keyPress(); 
+    dispMenu(vbat);
+    keyPress();
   } while( u8g.nextPage() );
 }
 
-
+/*
 int player1y = 25;
 int player2y = 25;
 int p1s = 0;
@@ -521,7 +443,6 @@ void startPong(){
     }
 
 
-    //if(millis() >= prev+10){
       ballx = ballx+directionx;
       bally = bally+directiony;
       if(bally <= 1 || bally >= 63){
@@ -550,7 +471,6 @@ void startPong(){
           directionx = random(1,2);
           ballspeed = random(7,13);
         }
-      //}
       delay(10);
     }
 
@@ -571,7 +491,7 @@ void startPong(){
     {
       displayPong();
     } while( u8g.nextPage() );
-}}
+}}*/
 
 
 void settings(){
@@ -606,8 +526,7 @@ void dispSettings(){
     u8g.print(F("1 Cellular Data: ON"));
   }
 }
-
-char temp[50];
+String temp = "";
 
 void weather(){
         float latitude, longitude, speed_kph, heading, speed_mph, altitude;
@@ -701,7 +620,7 @@ void dispWeather(){
   u8g.setPrintPos(0,7);
   u8g.print(F("Weather"));
   u8g.setPrintPos(0, 20);
-  u8g.print(F(temp));
+  u8g.print((temp));
 }
 
 
@@ -718,9 +637,9 @@ void dispStocks() {
   u8g.print(F("S&P: "));
 
   u8g.setPrintPos(32, 20);
-  u8g.print(F(dow));
+  u8g.print((dow));
   u8g.setPrintPos(32, 30);
-  u8g.print(F(nasdaq));
+  u8g.print((nasdaq));
   u8g.setPrintPos(32, 40);
-  u8g.print(F(sp));
+  u8g.print((sp));
 }
